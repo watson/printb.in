@@ -23,5 +23,6 @@
   "bugs": {
     "url": "https://github.com/watson/printb.in/issues"
   },
-  "homepage": "http://printb.in"
+  "homepage": "http://printb.in",
+  "private": true
 }

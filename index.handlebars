@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>printbin</title>
+</head>
+<body>
+  <h1>printbin</h1>
+  <p>
+    What is this? See <a href="https://github.com/watson/printbin">github.com/watson/printbin</a> for details
+  </p>
+
+  <h2>Jobs</h2>
+  <p>
+    <ul>
+      {{#each jobs}}
+        <li><a href="https://s3.amazonaws.com/watson-printbin/{{this}}">{{this}}</a></li>
+      {{/each}}
+    </ul>
+  </p>
+</body>
+</html>

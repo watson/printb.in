@@ -7,7 +7,7 @@ var handlebars = require('handlebars')
 var AWS = require('aws-sdk')
 
 var s3 = new AWS.S3()
-var index = handlebars.compile(fs.readFileSync('index.handlebars').toString())
+var tmpl = handlebars.compile(fs.readFileSync('index.handlebars').toString())
 
 var server = http.createServer(function (req, res) {
   if (req.method !== 'GET' || req.url !== '/') {
@@ -24,7 +24,7 @@ var server = http.createServer(function (req, res) {
       return
     }
 
-    var html = index({ jobs: keys })
+    var html = tmpl({ jobs: keys })
     res.writeHead(200, {
       'Content-Length': Buffer.byteLength(html),
       'Content-Type': 'text/html'

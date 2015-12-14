@@ -4,6 +4,7 @@
   "description": "The source for printb.in",
   "main": "index.js",
   "dependencies": {
+    "after-all": "^2.0.2",
     "aws-sdk": "^2.2.21",
     "handlebars": "^4.0.5",
     "opbeat": "^3.1.3"

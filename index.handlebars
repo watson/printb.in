@@ -19,8 +19,8 @@
   <h2>Jobs</h2>
   <p>
     <ul>
-      {{#each jobs}}
-        <li><a href="https://s3.amazonaws.com/watson-printbin/{{this}}">{{this}}</a></li>
+      {{#each docs}}
+        <li><a href="https://s3.amazonaws.com/watson-printbin/{{this.key}}">{{this.name}}</a></li>
       {{/each}}
     </ul>
   </p>

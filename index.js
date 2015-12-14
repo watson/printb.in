@@ -10,29 +10,20 @@ var s3 = new AWS.S3()
 var index = handlebars.compile(fs.readFileSync('index.handlebars').toString())
 
 var server = http.createServer(function (req, res) {
-  if (req.method !== 'GET') {
+  if (req.method !== 'GET' || req.url !== '/') {
     res.statusCode = 404
     res.end()
     return
   }
 
-  res.error = function (err) {
-    opbeat.captureError(err)
-    res.statusCode = 500
-    res.end()
-  }
-
-  if (req.url === '/') overview(req, res)
-  else job(req, res)
-})
-
-server.listen(process.env.PORT, function () {
-  console.log('Server listening on port', server.address().port)
-})
-
-function overview (req, res) {
   fetchKeys(function (err, keys) {
-    if (err) return res.error(err)
+    if (err) {
+      opbeat.captureError(err)
+      res.statusCode = 500
+      res.end()
+      return
+    }
+
     var html = index({ jobs: keys })
     res.writeHead(200, {
       'Content-Length': Buffer.byteLength(html),
@@ -40,12 +31,11 @@ function overview (req, res) {
     })
     res.end(html)
   })
-}
+})
 
-function job (req, res) {
-  res.statusCode = 404
-  res.end()
-}
+server.listen(process.env.PORT, function () {
+  console.log('Server listening on port', server.address().port)
+})
 
 function fetchKeys (cb) {
   var params = {

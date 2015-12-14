@@ -13,7 +13,11 @@ var BUCKET = 'watson-printbin'
 var names = {}
 
 var server = http.createServer(function (req, res) {
-  if (req.method !== 'GET' || req.url !== '/') {
+  if (req.method !== 'GET') {
+    res.writeHead(405, { Allow: 'GET' })
+    res.end()
+    return
+  } else if (req.url !== '/') {
     res.statusCode = 404
     res.end()
     return

@@ -9,7 +9,7 @@ var AWS = require('aws-sdk')
 
 var s3 = new AWS.S3()
 var tmpl = handlebars.compile(fs.readFileSync('index.handlebars').toString())
-var BUCKET = 'watson-printbin'
+var BUCKET = process.env.AWS_S3_BUCKET || 'printbin'
 var names = {}
 
 var server = http.createServer(function (req, res) {
